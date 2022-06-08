@@ -17,21 +17,17 @@ const TestModule = NativeModules.TestModule
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return TestModule.multiply(a, b);
-}
-
-export function getPlatformAndVersion(): Promise<number> {
+export function getPlatformAndVersion(): Promise<string> {
   return TestModule.getPlatformAndVersion();
 }
 
-export function dispatchEventEverySecond() {
-  TestModule.dispatchEventEverySecond();
+export function dispatchSimpleEvent() {
+  TestModule.dispatchSimpleEvent();
 }
 
-export function getCurrentTimeEvents(callback: (time: number) => void): void {
-  const clockEvents = new NativeEventEmitter(NativeModules.Clock);
-  clockEvents.addListener('onTimeUpdated', (time: {count: number}) => {
-    callback(time.count);
-  });
+export function getSimpleEvents(callback: (simpleEventResult: string) => void): void {
+  const eventEmitter = new NativeEventEmitter(TestModule);
+  eventEmitter.addListener('simple-event', (event) => {
+    callback(event.info)
+ });
 };

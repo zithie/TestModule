@@ -11,27 +11,15 @@ import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
 
-class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class TestModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
-  private val _mainHandler = Handler(Looper.getMainLooper())
   private val _reactContext = reactContext
-  var secondsCount = 0
-
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
-  @ReactMethod
-  fun multiply(a: Int, b: Int, promise: Promise) {
-
-    promise.resolve(a * b)
-
-  }
+  private val _info = TestClass("Android", android.os.Build.VERSION.SDK_INT.toString())
 
   @ReactMethod
   fun getPlatformAndVersion(promise: Promise) {
-    val version = android.os.Build.VERSION.SDK_INT
-    promise.resolve("Platform is Android and version is $version")
+    promise.resolve("Platform: ${_info.platform}, Version: ${_info.version}")
   }
-
 
   @ReactMethod
   fun addListener(eventName: String) {
@@ -44,20 +32,11 @@ class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBase
   }
 
   @ReactMethod
-  fun dispatchEventEverySecond() {
-    _mainHandler.post(object : Runnable {
-      override fun run() {
-        secondsCount += 1
-        val event = Arguments.createMap()
-        event.putInt("count", secondsCount)
-        sendEvent(
-          _reactContext,
-          "onTimeUpdated",
-          event
-        )
-        _mainHandler.postDelayed(this, 1000)
-      }
-    })
+  fun dispatchSimpleEvent() {
+    val params = Arguments.createMap().apply {
+      putString("info", "Platform: ${_info.platform}, Version: ${_info.version}")
+    }
+    sendEvent(_reactContext, "simple-event", params)
   }
 
   private fun sendEvent(reactContext: ReactContext, eventName: String, params: WritableMap?) {
