@@ -1,6 +1,6 @@
 # Test Module
 
-Test Module to demonstrate communication between React Native & native Android or iOS code.
+This Test Module demonstrates communication between React Native & native Android or iOS code.
 
 **Tested with the following setup:**
 * macOS Monterey version 12.4
