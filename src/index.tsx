@@ -20,3 +20,7 @@ const TestModule = NativeModules.TestModule
 export function multiply(a: number, b: number): Promise<number> {
   return TestModule.multiply(a, b);
 }
+
+export function getPlatformAndVersion(): Promise<number> {
+  return TestModule.getPlatformAndVersion();
+}
