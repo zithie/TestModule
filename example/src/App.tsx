@@ -1,18 +1,23 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { getPlatformAndVersion } from 'test-module';
+import { dispatchEventEverySecond, getCurrentTimeEvents, getPlatformAndVersion } from 'test-module';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
+  const [seconds, setSeconds] = React.useState<number>(0);
 
   React.useEffect(() => {
     getPlatformAndVersion().then(setResult)
+    getCurrentTimeEvents(setSeconds)
+    dispatchEventEverySecond()
+
   }, []);
 
   return (
     <View style={styles.container}>
       <Text>{result}</Text>
+      <Text>Seconds count is: {seconds}</Text>
     </View>
   );
 }

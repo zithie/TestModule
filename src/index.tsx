@@ -1,4 +1,4 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 
 const LINKING_ERROR =
   `The package 'test-module' doesn't seem to be linked. Make sure: \n\n` +
@@ -24,3 +24,14 @@ export function multiply(a: number, b: number): Promise<number> {
 export function getPlatformAndVersion(): Promise<number> {
   return TestModule.getPlatformAndVersion();
 }
+
+export function dispatchEventEverySecond() {
+  TestModule.dispatchEventEverySecond();
+}
+
+export function getCurrentTimeEvents(callback: (time: number) => void): void {
+  const clockEvents = new NativeEventEmitter(NativeModules.Clock);
+  clockEvents.addListener('onTimeUpdated', (time: {count: number}) => {
+    callback(time.count);
+  });
+};
