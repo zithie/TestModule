@@ -36,12 +36,6 @@ yarn example android
 yarn example ios
 ```
 
-## Installation
-
-```sh
-npm install test-module
-```
-
 ## Usage
 
 Get platform and version:
