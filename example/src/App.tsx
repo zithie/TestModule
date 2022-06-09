@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
-import { Button, StyleSheet, View, Text } from 'react-native';
 import { addSimpleEventListener, dispatchSimpleEvent, getPlatformAndVersion, removeSimpleEventListener } from 'test-module';
 
 export default function App() {
@@ -33,6 +33,8 @@ export default function App() {
   );
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -48,10 +50,5 @@ const styles = StyleSheet.create({
   },
   valueText: {
     textAlign: 'center'
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
+  }
 });
