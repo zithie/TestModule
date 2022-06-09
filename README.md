@@ -44,17 +44,45 @@ npm install test-module
 
 ## Usage
 
+Get platform and version:
+
 ```js
-import { multiply } from "test-module";
+import { getPlatformAndVersion } from "test-module";
 
 // ...
 
-const result = await multiply(3, 7);
+const result = await getPlatformAndVersion()
 ```
 
-## Contributing
+Add event listener for simple-event:
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+```js
+import { addSimpleEventListener } from "test-module";
+
+// ...
+
+addSimpleEventListener()
+```
+
+Dispatch simple-event:
+
+```js
+import { dispatchSimpleEvent } from "test-module";
+
+// ...
+
+dispatchSimpleEvent()
+```
+
+Remove event listener for simple-event:
+
+```js
+import { removeSimpleEventListener } from "test-module";
+
+// ...
+
+removeSimpleEventListener()
+```
 
 ## License
 
